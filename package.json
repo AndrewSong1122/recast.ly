@@ -8,7 +8,8 @@
   "scripts": {
     "start": "babel . --out-dir compiled --presets=react --ignore=node_modules,compiled --source-maps inline --watch",
     "test": "live-server --open=./SpecRunner.html --port=8081",
-    "postinstall": "curl -s https://raw.githubusercontent.com/reactorcore/pomander/master/bin/install | bash"
+    "postinstall": "curl -s https://raw.githubusercontent.com/reactorcore/pomander/master/bin/install | bash",
+    "bad-to-the-bone": "echo 'blah blah, you guys are awesome' blah blah, you guys are awesome"
   },
   "dependencies": {
     "bootstrap": "^4.0.0-alpha.2",

@@ -6,27 +6,47 @@ import VideoPlayer from './VideoPlayer.js';
 class App extends React.Component {
   constructor(props) {
     super(props);
+    this.onItemClick = this.onItemClick.bind(this),
 
     this.state = {
       allVideos: exampleVideoData,
       currentVideo: exampleVideoData[0]
+       //object
     };
+
+
+  }
+
+  onItemClick(e) {
+
+    console.log(e.target.id);
+
+    var vidID = e.target.id;
+
+    if (vidID) {
+      for (var video of this.state.allVideos) {
+        if (video.id.videoId === vidID) {
+          this.setState({currentVideo: video});
+        }
+      }
+    }
   }
 
   render() {
     return (
       <div>
         <nav className="navbar">
+          <div><button onClick={this.onItemClick}>btn</button></div>
           <div className="col-md-6 offset-md-3">
             <div><h5><em>search</em> view goes here</h5></div>
           </div>
         </nav>
         <div className="row">
           <div className="col-md-7">
-            <div><h5><em><VideoPlayer video={exampleVideoData[0]} /></em></h5></div>
+            <VideoPlayer video={this.state.currentVideo} />
           </div>
           <div className="col-md-5">
-            <div><h5><VideoList videos={exampleVideoData}/></h5></div>
+            <div onClick={this.onItemClick}><VideoList videos={this.state.allVideos}/></div>
           </div>
         </div>
       </div>
