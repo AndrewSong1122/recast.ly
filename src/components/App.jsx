@@ -2,19 +2,35 @@ import exampleVideoData from '../data/exampleVideoData.js';
 import VideoList from './VideoList.js';
 import VideoListEntry from './VideoListEntry.js';
 import VideoPlayer from './VideoPlayer.js';
+import searchYouTube from '../lib/searchYouTube.js';
+import YOUTUBE_API_KEY from '../config/youtube.js';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.onItemClick = this.onItemClick.bind(this),
+    this.onItemClick = this.onItemClick.bind(this);
 
     this.state = {
       allVideos: exampleVideoData,
       currentVideo: exampleVideoData[0]
-       //object
+      //object
     };
 
+    console.log(YOUTUBE_API_KEY);
+    console.log(searchYouTube);
+  }
 
+  getVideos(query = 'whale shark') {
+    searchYouTube({query: query, key: YOUTUBE_API_KEY}, (videos) => {
+      this.setState({
+        allVideos: videos,
+        currentVideo: videos[0]
+      });
+    });
+  }
+
+  componentDidMount() {
+    this.getVideos();
   }
 
   onItemClick(e) {
@@ -36,7 +52,7 @@ class App extends React.Component {
     return (
       <div>
         <nav className="navbar">
-          <div><button onClick={this.onItemClick}>btn</button></div>
+          {/* <div><button onClick={this.onItemClick}>btn</button></div> */}
           <div className="col-md-6 offset-md-3">
             <div><h5><em>search</em> view goes here</h5></div>
           </div>
